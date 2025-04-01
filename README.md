@@ -1,0 +1,1 @@
+# json-schema-store-sync
