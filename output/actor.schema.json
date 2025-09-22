@@ -1,0 +1,210 @@
+{
+    "$id": "actor.json",
+    "title": "JSON schema of Apify Actor actor.json file",
+    "type": "object",
+    "properties": {
+        "actorSpecification": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1,
+            "description": "The version of the Actor specification, required and must be an integer set to 1.",
+            "x-intellij-html-description": "<p>The version of the Actor specification, <strong>required</strong> and must be an integer set to <code>1</code>.</p>",
+            "markdownDescription": "The version of the Actor specification, **required** and must be an integer set to `1`."
+        },
+        "name": {
+            "type": "string",
+            "description": "The required name of the Actor.",
+            "x-intellij-html-description": "<p>The <strong>required</strong> name of the Actor.</p>",
+            "markdownDescription": "The **required** name of the Actor."
+        },
+        "title": {
+            "type": "string",
+            "description": "A string for the title of the Actor.",
+            "x-intellij-html-description": "<p>A string for the title of the Actor.</p>",
+            "markdownDescription": "A string for the title of the Actor."
+        },
+        "description": {
+            "type": "string",
+            "description": "A string for a description of the Actor.",
+            "x-intellij-html-description": "<p>A string for a description of the Actor.</p>",
+            "markdownDescription": "A string for a description of the Actor."
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^([0-9]+)\\.([0-9]+)(\\.[0-9]+){0,1}$",
+            "description": "The required version of the Actor, formatted as [Number].[Number] (e.g., 1.0, 1.2.3).",
+            "x-intellij-html-description": "<p>The <strong>required</strong> version of the Actor, formatted as <code>[Number].[Number]</code> (e.g., <code>1.0</code>, <code>1.2.3</code>).</p>",
+            "markdownDescription": "The **required** version of the Actor, formatted as `[Number].[Number]` (e.g., `1.0`, `1.2.3`)."
+        },
+        "buildTag": {
+            "type": "string",
+            "default": "latest",
+            "description": "A string for the tag applied to a successful build; defaults to latest.",
+            "x-intellij-html-description": "<p>A string for the tag applied to a successful build; defaults to <code>latest</code>.</p>",
+            "markdownDescription": "A string for the tag applied to a successful build; defaults to `latest`."
+        },
+        "environmentVariables": {
+            "type": "object",
+            "patternProperties": {
+                "^": {
+                    "type": "string"
+                }
+            },
+            "description": "An object mapping environment variable names to their string values.",
+            "x-intellij-html-description": "<p>An object mapping environment variable names to their string values.</p>",
+            "markdownDescription": "An object mapping environment variable names to their string values."
+        },
+        "dockerfile": {
+            "type": "string",
+            "default": "../Dockerfile",
+            "description": "A string specifying the path to the Dockerfile; defaults to ../Dockerfile.",
+            "x-intellij-html-description": "<p>A string specifying the path to the Dockerfile; defaults to <code>../Dockerfile</code>.</p>",
+            "markdownDescription": "A string specifying the path to the Dockerfile; defaults to `../Dockerfile`."
+        },
+        "readme": {
+            "type": "string",
+            "default": "../README.md",
+            "description": "A string specifying the path to the README file; defaults to ../README.md.",
+            "x-intellij-html-description": "<p>A string specifying the path to the README file; defaults to <code>../README.md</code>.</p>",
+            "markdownDescription": "A string specifying the path to the README file; defaults to `../README.md`."
+        },
+        "minMemoryMbytes": {
+            "type": "integer",
+            "minimum": 128,
+            "maximum": 32768,
+            "description": "An integer between 128 and 32768 specifying the minimum memory in megabytes required.",
+            "x-intellij-html-description": "<p>An integer between <code>128</code> and <code>32768</code> specifying the minimum memory in megabytes required.</p>",
+            "markdownDescription": "An integer between `128` and `32768` specifying the minimum memory in megabytes required."
+        },
+        "maxMemoryMbytes": {
+            "type": "integer",
+            "minimum": 128,
+            "maximum": 32768,
+            "description": "An integer between 128 and 32768 specifying the maximum memory in megabytes allowed.",
+            "x-intellij-html-description": "<p>An integer between <code>128</code> and <code>32768</code> specifying the maximum memory in megabytes allowed.</p>",
+            "markdownDescription": "An integer between `128` and `32768` specifying the maximum memory in megabytes allowed."
+        },
+        "input": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "object"
+                }
+            ],
+            "description": "A string (path) or object for the Actor's input schema.",
+            "x-intellij-html-description": "<p>A string (path) or object for the Actor's input schema.</p>",
+            "markdownDescription": "A string (path) or object for the Actor's input schema."
+        },
+        "inputSchema": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "object"
+                }
+            ],
+            "description": "A string (path) or object for the Actor's input schema.",
+            "x-intellij-html-description": "<p>A string (path) or object for the Actor's input schema.</p>",
+            "markdownDescription": "A string (path) or object for the Actor's input schema."
+        },
+        "output": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "$ref": "output.schema.json"
+                }
+            ],
+            "description": "A string (path) or object for the Actor's output schema.",
+            "x-intellij-html-description": "<p>A string (path) or object for the Actor's output schema.</p>",
+            "markdownDescription": "A string (path) or object for the Actor's output schema."
+        },
+        "outputSchema": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "$ref": "output.schema.json"
+                }
+            ],
+            "description": "A string (path) or object for the Actor's output schema.",
+            "x-intellij-html-description": "<p>A string (path) or object for the Actor's output schema.</p>",
+            "markdownDescription": "A string (path) or object for the Actor's output schema."
+        },
+        "storages": {
+            "type": "object",
+            "properties": {
+                "keyValueStore": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "$ref": "key_value_store.schema.json"
+                        }
+                    ],
+                    "description": "A string (path) or object for the key-value store schema.",
+                    "x-intellij-html-description": "<p>A string (path) or object for the key-value store schema.</p>",
+                    "markdownDescription": "A string (path) or object for the key-value store schema."
+                },
+                "dataset": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "$ref": "dataset.schema.json"
+                        }
+                    ],
+                    "description": "A string (path) or object for the dataset schema, defining the structure of dataset items.",
+                    "x-intellij-html-description": "<p>A string (path) or object for the dataset schema, defining the structure of dataset items.</p>",
+                    "markdownDescription": "A string (path) or object for the dataset schema, defining the structure of dataset items."
+                },
+                "requestQueue": {
+                    "type": "string",
+                    "description": "A string (path) for the request queue.",
+                    "x-intellij-html-description": "<p>A string (path) for the request queue.</p>",
+                    "markdownDescription": "A string (path) for the request queue."
+                }
+            },
+            "description": "An object for defining schemas for different storage types.",
+            "x-intellij-html-description": "<p>An object for defining schemas for different storage types.</p>",
+            "markdownDescription": "An object for defining schemas for different storage types."
+        },
+        "usesStandbyMode": {
+            "type": "boolean",
+            "description": "A boolean to enable Standby mode for the Actor.",
+            "x-intellij-html-description": "<p>A boolean to enable Standby mode for the Actor.</p>",
+            "markdownDescription": "A boolean to enable Standby mode for the Actor."
+        },
+        "webServerSchema": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "object"
+                }
+            ],
+            "description": "A string (path) or object for the OpenAPI v3 schema of the Actor's web server.",
+            "x-intellij-html-description": "<p>A string (path) or object for the OpenAPI v3 schema of the Actor's web server.</p>",
+            "markdownDescription": "A string (path) or object for the OpenAPI v3 schema of the Actor's web server."
+        },
+        "webServerMcpPath": {
+            "type": "string",
+            "description": "A string.",
+            "x-intellij-html-description": "<p>A string.</p>",
+            "markdownDescription": "A string."
+        }
+    },
+    "required": [
+        "actorSpecification",
+        "version",
+        "name"
+    ]
+}

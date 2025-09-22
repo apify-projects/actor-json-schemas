@@ -1,0 +1,40 @@
+{
+    "name": "json-schema-bundler",
+    "version": "0.0.1",
+    "type": "module",
+    "description": "A simple and zero-opinion typescript starter template for building cross-platform command line applications.",
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "main": "./dist/index.js",
+    "bin": "./dist/cli.js",
+    "files": [
+        "dist/**/*",
+        "!dist/**/*.test.js"
+    ],
+    "dependencies": {
+        "@apify/eslint-config-ts": "^0.3.0",
+        "cheerio": "=1.0.0-rc.10",
+        "commander": "^13.1.0"
+    },
+    "devDependencies": {
+        "@apify/eslint-config-ts": "^0.3.0",
+        "@apify/tsconfig": "^0.1.0",
+        "@typescript-eslint/eslint-plugin": "^7.18.0",
+        "@typescript-eslint/parser": "^7.18.0",
+        "eslint": "^8.50.0",
+        "tsx": "^4.6.2",
+        "typescript": "^5.3.3",
+        "vitest": "^3.1.1"
+    },
+    "scripts": {
+        "start": "npm run start:dev",
+        "start:dev": "tsx src/cli.ts",
+        "build": "tsc",
+        "lint": "eslint ./src --ext .ts",
+        "lint:fix": "eslint ./src --ext .ts --fix",
+        "test": "vitest",
+        "test:input": "npm run start:dev -- -i ../json-schemes/input.schema.json -o ../output/input.schema.json",
+        "test:actor": "npm run start:dev -- -i ../json-schemes/actor.schema.json -o ../output/actor.schema.json"
+    }
+}
