@@ -75,7 +75,7 @@ export async function bundleJsonSchema(
         return jsonSchema ?? {};
     }
 
-    return scopeJsonSchema(filePath, jsonSchema, jsonSchema);
+    return await scopeJsonSchema(filePath, jsonSchema, jsonSchema);
 }
 
 export async function scopeJsonSchema(
@@ -95,7 +95,11 @@ export async function scopeJsonSchema(
             if (!refRelativeFilePath && value.startsWith('#')) {
                 // Local reference
                 const [_, anchorPath] = value?.trim().split('#');
-                parent.value[REF_ATTRIBUTE] = `#/${prefix}/${anchorPath}`;
+                parent.value[REF_ATTRIBUTE] = `#`;
+                if (prefix) {
+                    parent.value[REF_ATTRIBUTE] += `${prefix}`;
+                }
+                parent.value[REF_ATTRIBUTE] += `${anchorPath}`;
                 console.log("Scoping ", jsonPointer , `${prefix}#${anchorPath}`);
             } else if (refRelativeFilePath && value.startsWith('https://') || value.startsWith('http://')) {
                 console.log("Skipping external resource:", jsonPointer , value);

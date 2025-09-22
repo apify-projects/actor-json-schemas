@@ -34,7 +34,10 @@
         "lint": "eslint ./src --ext .ts",
         "lint:fix": "eslint ./src --ext .ts --fix",
         "test": "vitest",
-        "test:input": "npm run start:dev -- -i ../json-schemes/input.schema.json -o ../output/input.schema.json",
-        "test:actor": "npm run start:dev -- -i ../json-schemes/actor.schema.json -o ../output/actor.schema.json"
+        "bundle-actor-schema": "npm run start:dev -- -i ../output/actor.schema.json -o ../output/actor.schema.json",
+        "bundle-dataset-schema": "npm run start:dev -- -i ../output/dataset.schema.json -o ../output/dataset.schema.json",
+        "bundle-input-schema": "npm run start:dev -- -i ../output/input.schema.json -o ../output/input.schema.json",
+        "bundle-key-value-store-schema": "npm run start:dev -- -i ../output/key_value_store.schema.json -o ../output/key_value_store.schema.json",
+        "bundle-output-schema": "npm run start:dev -- -i ../output/output.schema.json -o ../output/output.schema.json"
     }
 }

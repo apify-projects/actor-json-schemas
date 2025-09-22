@@ -93,9 +93,9 @@
                     "type": "object"
                 }
             ],
-            "description": "A string (path) or object for the Actor's input schema.",
-            "x-intellij-html-description": "<p>A string (path) or object for the Actor's input schema.</p>",
-            "markdownDescription": "A string (path) or object for the Actor's input schema."
+            "description": "Path or direct definition of the Actor's input schema.",
+            "x-intellij-html-description": "<p>Path or direct definition of the Actor's input schema.</p>",
+            "markdownDescription": "Path or direct definition of the Actor's input schema."
         },
         "inputSchema": {
             "oneOf": [
@@ -106,9 +106,9 @@
                     "type": "object"
                 }
             ],
-            "description": "A string (path) or object for the Actor's input schema.",
-            "x-intellij-html-description": "<p>A string (path) or object for the Actor's input schema.</p>",
-            "markdownDescription": "A string (path) or object for the Actor's input schema."
+            "description": "Path or direct definition of the Actor's input schema.",
+            "x-intellij-html-description": "<p>Path or direct definition of the Actor's input schema.</p>",
+            "markdownDescription": "Path or direct definition of the Actor's input schema."
         },
         "output": {
             "oneOf": [
@@ -116,12 +116,12 @@
                     "type": "string"
                 },
                 {
-                    "$ref": "output.schema.json"
+                    "$ref": "#/$defs/output-schema-json-91ce9a9610b9af461b06bfa420050bf6"
                 }
             ],
-            "description": "A string (path) or object for the Actor's output schema.",
-            "x-intellij-html-description": "<p>A string (path) or object for the Actor's output schema.</p>",
-            "markdownDescription": "A string (path) or object for the Actor's output schema."
+            "description": "Path or direct definition of the Actor's output schema.",
+            "x-intellij-html-description": "<p>Path or direct definition of the Actor's output schema.</p>",
+            "markdownDescription": "Path or direct definition of the Actor's output schema."
         },
         "outputSchema": {
             "oneOf": [
@@ -129,12 +129,12 @@
                     "type": "string"
                 },
                 {
-                    "$ref": "output.schema.json"
+                    "$ref": "#/$defs/output-schema-json-91ce9a9610b9af461b06bfa420050bf6"
                 }
             ],
-            "description": "A string (path) or object for the Actor's output schema.",
-            "x-intellij-html-description": "<p>A string (path) or object for the Actor's output schema.</p>",
-            "markdownDescription": "A string (path) or object for the Actor's output schema."
+            "description": "Path or direct definition of the Actor's output schema.",
+            "x-intellij-html-description": "<p>Path or direct definition of the Actor's output schema.</p>",
+            "markdownDescription": "Path or direct definition of the Actor's output schema."
         },
         "storages": {
             "type": "object",
@@ -145,12 +145,12 @@
                             "type": "string"
                         },
                         {
-                            "$ref": "key_value_store.schema.json"
+                            "$ref": "#/$defs/key_value_store-schema-json-c12aa12ad3d4187d4f21c68fb9c74316"
                         }
                     ],
-                    "description": "A string (path) or object for the key-value store schema.",
-                    "x-intellij-html-description": "<p>A string (path) or object for the key-value store schema.</p>",
-                    "markdownDescription": "A string (path) or object for the key-value store schema."
+                    "description": "Path or direct definition of the key-value store schema.",
+                    "x-intellij-html-description": "<p>Path or direct definition of the key-value store schema.</p>",
+                    "markdownDescription": "Path or direct definition of the key-value store schema."
                 },
                 "dataset": {
                     "oneOf": [
@@ -158,18 +158,18 @@
                             "type": "string"
                         },
                         {
-                            "$ref": "dataset.schema.json"
+                            "$ref": "#/$defs/dataset-schema-json-c1526cc949850fe7c57056be547e7171"
                         }
                     ],
-                    "description": "A string (path) or object for the dataset schema, defining the structure of dataset items.",
-                    "x-intellij-html-description": "<p>A string (path) or object for the dataset schema, defining the structure of dataset items.</p>",
-                    "markdownDescription": "A string (path) or object for the dataset schema, defining the structure of dataset items."
+                    "description": "Path or direct definition of the dataset schema, defining the structure of dataset items.",
+                    "x-intellij-html-description": "<p>Path or direct definition of the dataset schema, defining the structure of dataset items.</p>",
+                    "markdownDescription": "Path or direct definition of the dataset schema, defining the structure of dataset items."
                 },
                 "requestQueue": {
                     "type": "string",
-                    "description": "A string (path) for the request queue.",
-                    "x-intellij-html-description": "<p>A string (path) for the request queue.</p>",
-                    "markdownDescription": "A string (path) for the request queue."
+                    "description": "Path for direct the request queue.",
+                    "x-intellij-html-description": "<p>Path for direct the request queue.</p>",
+                    "markdownDescription": "Path for direct the request queue."
                 }
             },
             "description": "An object for defining schemas for different storage types.",
@@ -191,20 +191,417 @@
                     "type": "object"
                 }
             ],
-            "description": "A string (path) or object for the OpenAPI v3 schema of the Actor's web server.",
-            "x-intellij-html-description": "<p>A string (path) or object for the OpenAPI v3 schema of the Actor's web server.</p>",
-            "markdownDescription": "A string (path) or object for the OpenAPI v3 schema of the Actor's web server."
+            "description": "Path or direct definition of the OpenAPI v3 schema of the Actor's web server.",
+            "x-intellij-html-description": "<p>Path or direct definition of the OpenAPI v3 schema of the Actor's web server.</p>",
+            "markdownDescription": "Path or direct definition of the OpenAPI v3 schema of the Actor's web server."
         },
         "webServerMcpPath": {
             "type": "string",
-            "description": "A string.",
-            "x-intellij-html-description": "<p>A string.</p>",
-            "markdownDescription": "A string."
+            "description": "Path of the streamable HTTP MCP endpoint exposed by the standby Actor",
+            "x-intellij-html-description": "<p>Path of the streamable HTTP MCP endpoint exposed by the standby Actor</p>",
+            "markdownDescription": "Path of the streamable HTTP MCP endpoint exposed by the standby Actor"
         }
     },
     "required": [
         "actorSpecification",
         "version",
         "name"
-    ]
+    ],
+    "$defs": {
+        "output-schema-json-91ce9a9610b9af461b06bfa420050bf6": {
+            "$id": "output.json",
+            "title": "JSON schema of Apify Actor output schema",
+            "type": "object",
+            "properties": {
+                "actorOutputSchemaVersion": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1,
+                    "description": "The version of the output schema. It's a required integer field with a minimum and maximum value of 1.",
+                    "x-intellij-html-description": "<p>The version of the output schema. It's a required integer field with a minimum and maximum value of 1.</p>",
+                    "markdownDescription": "The version of the output schema. It's a required integer field with a minimum and maximum value of 1."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A string that provides a description for the output schema. This text is displayed in the Output user interface.",
+                    "x-intellij-html-description": "<p>A string that provides a description for the output schema. This text is displayed in the Output user interface.</p>",
+                    "markdownDescription": "A string that provides a description for the output schema. This text is displayed in the Output user interface."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "A string that provides a title for the output schema.",
+                    "x-intellij-html-description": "<p>A string that provides a title for the output schema.</p>",
+                    "markdownDescription": "A string that provides a title for the output schema."
+                },
+                "properties": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^": {
+                            "title": "Output schema property",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "description": "A string that provides a title for the specific output property.",
+                                    "x-intellij-html-description": "<p>A string that provides a title for the specific output property.</p>",
+                                    "markdownDescription": "A string that provides a title for the specific output property."
+                                },
+                                "type": {
+                                    "const": "string",
+                                    "description": "The data type of the output property's value. The schema constrains this to the string literal \"string\", which is a required field. The output value is always a URL, thus a string.",
+                                    "x-intellij-html-description": "<p>The data type of the output property's value. The schema constrains this to the string literal \"string\", which is a required field. The output value is always a URL, thus a string.</p>",
+                                    "markdownDescription": "The data type of the output property's value. The schema constrains this to the string literal \"string\", which is a required field. The output value is always a URL, thus a string."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "A string that provides a description for the specific output property.",
+                                    "x-intellij-html-description": "<p>A string that provides a description for the specific output property.</p>",
+                                    "markdownDescription": "A string that provides a description for the specific output property."
+                                },
+                                "template": {
+                                    "type": "string",
+                                    "description": "A required string that defines how the output value (a URL) is constructed. It can use text formatting with {{variable}} placeholders.",
+                                    "x-intellij-html-description": "<p>A required string that defines how the output value (a URL) is constructed. It can use text formatting with <code>{{variable}}</code> placeholders.</p>",
+                                    "markdownDescription": "A required string that defines how the output value (a URL) is constructed. It can use text formatting with `{{variable}}` placeholders."
+                                }
+                            },
+                            "required": [
+                                "type",
+                                "template"
+                            ]
+                        },
+                        "description": "An object defining a single output property. It must contain the type and template attributes. It can also include title, description, and resourceType.",
+                        "x-intellij-html-description": "<p>An object defining a single output property. It must contain the <code>type</code> and <code>template</code> attributes. It can also include <code>title</code>, <code>description</code>, and <code>resourceType</code>.</p>",
+                        "markdownDescription": "An object defining a single output property. It must contain the `type` and `template` attributes. It can also include `title`, `description`, and `resourceType`."
+                    },
+                    "description": "This is a required object that defines the output properties of the Actor. Its keys are the names of the output properties, and its values are objects that define each property's schema.",
+                    "x-intellij-html-description": "<p>This is a required object that defines the output properties of the Actor. Its keys are the names of the output properties, and its values are objects that define each property's schema.</p>",
+                    "markdownDescription": "This is a required object that defines the output properties of the Actor. Its keys are the names of the output properties, and its values are objects that define each property's schema."
+                }
+            },
+            "required": [
+                "actorOutputSchemaVersion",
+                "properties"
+            ]
+        },
+        "key_value_store-schema-json-c12aa12ad3d4187d4f21c68fb9c74316": {
+            "$id": "key_value_store.json",
+            "title": "JSON schema of Apify Actor key-value store schema",
+            "type": "object",
+            "properties": {
+                "actorKeyValueStoreSchemaVersion": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1,
+                    "description": "The version of the key-value store schema. It's a required integer and must be exactly 1.",
+                    "x-intellij-html-description": "<p>The version of the key-value store schema. It's a required integer and must be exactly 1.</p>",
+                    "markdownDescription": "The version of the key-value store schema. It's a required integer and must be exactly 1."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the key-value store schema. It's a required string.",
+                    "x-intellij-html-description": "<p>The title of the key-value store schema. It's a required string.</p>",
+                    "markdownDescription": "The title of the key-value store schema. It's a required string."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the key-value store schema. It's an optional string.",
+                    "x-intellij-html-description": "<p>A description of the key-value store schema. It's an optional string.</p>",
+                    "markdownDescription": "A description of the key-value store schema. It's an optional string."
+                },
+                "type": {
+                    "const": "object",
+                    "description": "A constant value that must be \"object\", indicating the schema describes a JSON object.",
+                    "x-intellij-html-description": "<p>A constant value that must be \"object\", indicating the schema describes a JSON object.</p>",
+                    "markdownDescription": "A constant value that must be \"object\", indicating the schema describes a JSON object."
+                },
+                "collections": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "description": "The title of the collection. It's an optional string.",
+                                    "x-intellij-html-description": "<p>The title of the collection. It's an optional string.</p>",
+                                    "markdownDescription": "The title of the collection. It's an optional string."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "A description of the collection. It's an optional string.",
+                                    "x-intellij-html-description": "<p>A description of the collection. It's an optional string.</p>",
+                                    "markdownDescription": "A description of the collection. It's an optional string."
+                                },
+                                "contentTypes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "minItems": 1,
+                                    "uniqueItems": true,
+                                    "description": "An array of strings specifying the allowed content types for the files in the collection (e.g., \"application/json\", \"image/jpeg\"). The array must contain at least one unique item. This attribute is required if jsonSchema is present.",
+                                    "x-intellij-html-description": "<p>An array of strings specifying the allowed content types for the files in the collection (e.g., \"application/json\", \"image/jpeg\"). The array must contain at least one unique item. This attribute is required if <code>jsonSchema</code> is present.</p>",
+                                    "markdownDescription": "An array of strings specifying the allowed content types for the files in the collection (e.g., \"application/json\", \"image/jpeg\"). The array must contain at least one unique item. This attribute is required if `jsonSchema` is present."
+                                },
+                                "keyPrefix": {
+                                    "type": "string",
+                                    "description": "A string that serves as a prefix for all keys in this collection. It's used when a collection contains multiple files. This attribute is mutually exclusive with key.",
+                                    "x-intellij-html-description": "<p>A string that serves as a prefix for all keys in this collection. It's used when a collection contains multiple files. This attribute is mutually exclusive with <code>key</code>.</p>",
+                                    "markdownDescription": "A string that serves as a prefix for all keys in this collection. It's used when a collection contains multiple files. This attribute is mutually exclusive with `key`."
+                                },
+                                "key": {
+                                    "type": "string",
+                                    "description": "A string that is the exact key for a single file in the collection. This is used when a collection contains only one specific file. This attribute is mutually exclusive with keyPrefix.",
+                                    "x-intellij-html-description": "<p>A string that is the exact key for a single file in the collection. This is used when a collection contains only one specific file. This attribute is mutually exclusive with <code>keyPrefix</code>.</p>",
+                                    "markdownDescription": "A string that is the exact key for a single file in the collection. This is used when a collection contains only one specific file. This attribute is mutually exclusive with `keyPrefix`."
+                                },
+                                "jsonSchema": {
+                                    "$ref": "http://json-schema.org/draft-07/schema#",
+                                    "description": "A JSON schema object that defines the structure of the JSON content for files in the collection. This is only applicable when contentTypes includes \"application/json\".",
+                                    "x-intellij-html-description": "<p>A JSON schema object that defines the structure of the JSON content for files in the collection. This is only applicable when <code>contentTypes</code> includes \"application/json\".</p>",
+                                    "markdownDescription": "A JSON schema object that defines the structure of the JSON content for files in the collection. This is only applicable when `contentTypes` includes \"application/json\"."
+                                }
+                            },
+                            "oneOf": [
+                                {
+                                    "required": [
+                                        "key"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                        "keyPrefix"
+                                    ]
+                                }
+                            ],
+                            "dependencies": {
+                                "jsonSchema": {
+                                    "properties": {
+                                        "contentTypes": {
+                                            "const": [
+                                                "application/json"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "contentTypes"
+                                    ]
+                                }
+                            },
+                            "description": "A property within the collections object that defines the schema for a specific collection. The property name can be any string.",
+                            "x-intellij-html-description": "<p>A property within the <code>collections</code> object that defines the schema for a specific collection. The property name can be any string.</p>",
+                            "markdownDescription": "A property within the `collections` object that defines the schema for a specific collection. The property name can be any string."
+                        }
+                    },
+                    "description": "A required object where each property represents a collection of files in the key-value store. Each property name is an arbitrary string that identifies the collection.",
+                    "x-intellij-html-description": "<p>A required object where each property represents a collection of files in the key-value store. Each property name is an arbitrary string that identifies the collection.</p>",
+                    "markdownDescription": "A required object where each property represents a collection of files in the key-value store. Each property name is an arbitrary string that identifies the collection."
+                }
+            },
+            "required": [
+                "actorKeyValueStoreSchemaVersion",
+                "title",
+                "collections"
+            ]
+        },
+        "dataset-schema-json-c1526cc949850fe7c57056be547e7171": {
+            "$id": "dataset.json",
+            "title": "JSON schema of Apify Actor dataset schema",
+            "type": "object",
+            "properties": {
+                "actorSpecification": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1,
+                    "description": "Specifies the version of the dataset schema structure document. Only version 1 is currently supported.",
+                    "x-intellij-html-description": "<p>Specifies the version of the dataset schema structure document. Only version 1 is currently supported.</p>",
+                    "markdownDescription": "Specifies the version of the dataset schema structure document. Only version 1 is currently supported."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the Actor dataset schema.",
+                    "x-intellij-html-description": "<p>The title of the Actor dataset schema.</p>",
+                    "markdownDescription": "The title of the Actor dataset schema."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Actor dataset schema.",
+                    "x-intellij-html-description": "<p>The description of the Actor dataset schema.</p>",
+                    "markdownDescription": "The description of the Actor dataset schema."
+                },
+                "fields": {
+                    "$ref": "http://json-schema.org/draft-07/schema#",
+                    "description": "A JSON schema compatible object that defines the schema for a single dataset object. It uses JSON Schema Draft 2020-12 or other compatible formats.",
+                    "x-intellij-html-description": "<p>A JSON schema compatible object that defines the schema for a single dataset object. It uses JSON Schema Draft 2020-12 or other compatible formats.</p>",
+                    "markdownDescription": "A JSON schema compatible object that defines the schema for a single dataset object. It uses JSON Schema Draft 2020-12 or other compatible formats."
+                },
+                "views": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "description": "The title of the view, which is visible in the UI's Output tab and in the API.",
+                                    "x-intellij-html-description": "<p>The title of the view, which is visible in the UI's Output tab and in the API.</p>",
+                                    "markdownDescription": "The title of the view, which is visible in the UI's Output tab and in the API."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "The description of the view, which is only available in the API response.",
+                                    "x-intellij-html-description": "<p>The description of the view, which is only available in the API response.</p>",
+                                    "markdownDescription": "The description of the view, which is only available in the API response."
+                                },
+                                "transformation": {
+                                    "type": "object",
+                                    "properties": {
+                                        "fields": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 1,
+                                            "uniqueItems": true,
+                                            "description": "An array of strings that selects the fields to be presented in the output. The order of the fields determines the order of the columns in the UI visualization.",
+                                            "x-intellij-html-description": "<p>An array of strings that selects the fields to be presented in the output. The order of the fields determines the order of the columns in the UI visualization.</p>",
+                                            "markdownDescription": "An array of strings that selects the fields to be presented in the output. The order of the fields determines the order of the columns in the UI visualization."
+                                        },
+                                        "clean": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "description": "A boolean flag. When true, it removes fields from the output that are not specified in the fields array.",
+                                            "x-intellij-html-description": "<p>A boolean flag. When true, it removes fields from the output that are not specified in the <code>fields</code> array.</p>",
+                                            "markdownDescription": "A boolean flag. When true, it removes fields from the output that are not specified in the `fields` array."
+                                        },
+                                        "omit": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 1,
+                                            "uniqueItems": true,
+                                            "description": "An array of strings that specifies fields to be removed from the output. Nested field names can also be used.",
+                                            "x-intellij-html-description": "<p>An array of strings that specifies fields to be removed from the output. Nested field names can also be used.</p>",
+                                            "markdownDescription": "An array of strings that specifies fields to be removed from the output. Nested field names can also be used."
+                                        },
+                                        "unwind": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 1,
+                                            "uniqueItems": true,
+                                            "description": "An array of strings that specifies fields to deconstruct nested children into a parent object, effectively flattening the structure.",
+                                            "x-intellij-html-description": "<p>An array of strings that specifies fields to deconstruct nested children into a parent object, effectively flattening the structure.</p>",
+                                            "markdownDescription": "An array of strings that specifies fields to deconstruct nested children into a parent object, effectively flattening the structure."
+                                        },
+                                        "flatten": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 1,
+                                            "uniqueItems": true,
+                                            "description": "An array of strings that specifies nested objects to transform into a flat structure.",
+                                            "x-intellij-html-description": "<p>An array of strings that specifies nested objects to transform into a flat structure.</p>",
+                                            "markdownDescription": "An array of strings that specifies nested objects to transform into a flat structure."
+                                        },
+                                        "desc": {
+                                            "type": "boolean",
+                                            "description": "A boolean flag. If true, results are sorted in descending order based on the time they were written to the dataset (newest first). By default, they are sorted in ascending order.",
+                                            "x-intellij-html-description": "<p>A boolean flag. If <code>true</code>, results are sorted in descending order based on the time they were written to the dataset (newest first). By default, they are sorted in ascending order.</p>",
+                                            "markdownDescription": "A boolean flag. If `true`, results are sorted in descending order based on the time they were written to the dataset (newest first). By default, they are sorted in ascending order."
+                                        },
+                                        "skipHidden": {
+                                            "type": "boolean",
+                                            "description": "A boolean flag. If true, fields marked as hidden in the original schema are skipped.",
+                                            "x-intellij-html-description": "<p>A boolean flag. If <code>true</code>, fields marked as hidden in the original schema are skipped.</p>",
+                                            "markdownDescription": "A boolean flag. If `true`, fields marked as hidden in the original schema are skipped."
+                                        },
+                                        "skipEmpty": {
+                                            "type": "boolean",
+                                            "description": "A boolean flag. If true, empty fields are skipped.",
+                                            "x-intellij-html-description": "<p>A boolean flag. If <code>true</code>, empty fields are skipped.</p>",
+                                            "markdownDescription": "A boolean flag. If `true`, empty fields are skipped."
+                                        }
+                                    },
+                                    "description": "The definition of data transformation applied when dataset data is loaded from the Dataset API.",
+                                    "x-intellij-html-description": "<p>The definition of data transformation applied when dataset data is loaded from the Dataset API.</p>",
+                                    "markdownDescription": "The definition of data transformation applied when dataset data is loaded from the Dataset API."
+                                },
+                                "display": {
+                                    "type": "object",
+                                    "properties": {
+                                        "component": {
+                                            "type": "string",
+                                            "enum": [
+                                                "table",
+                                                "grid"
+                                            ],
+                                            "description": "A string that specifies the type of UI component to use for displaying the data. The only valid value is \"table\" or \"grid\".",
+                                            "x-intellij-html-description": "<p>A string that specifies the type of UI component to use for displaying the data. The only valid value is \"table\" or \"grid\".</p>",
+                                            "markdownDescription": "A string that specifies the type of UI component to use for displaying the data. The only valid value is \"table\" or \"grid\"."
+                                        },
+                                        "options": {
+                                            "type": "object",
+                                            "description": "An object for passing additional options to the display component. The specific properties depend on the component used.",
+                                            "x-intellij-html-description": "<p>An object for passing additional options to the display component. The specific properties depend on the <code>component</code> used.</p>",
+                                            "markdownDescription": "An object for passing additional options to the display component. The specific properties depend on the `component` used."
+                                        },
+                                        "properties": {
+                                            "type": "object",
+                                            "description": "An object where keys match the transformation.fields and values are ViewDisplayProperty objects. It is used to customize the display of specific columns, such as their label or format.",
+                                            "x-intellij-html-description": "<p>An object where keys match the <code>transformation.fields</code> and values are <code>ViewDisplayProperty</code> objects. It is used to customize the display of specific columns, such as their label or format.</p>",
+                                            "markdownDescription": "An object where keys match the `transformation.fields` and values are `ViewDisplayProperty` objects. It is used to customize the display of specific columns, such as their label or format."
+                                        }
+                                    },
+                                    "required": [
+                                        "component"
+                                    ],
+                                    "description": "The definition for the visual presentation of the data in the Output tab UI.",
+                                    "x-intellij-html-description": "<p>The definition for the visual presentation of the data in the Output tab UI.</p>",
+                                    "markdownDescription": "The definition for the visual presentation of the data in the Output tab UI."
+                                }
+                            },
+                            "anyOf": [
+                                {
+                                    "required": [
+                                        "title",
+                                        "transformation"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                        "title",
+                                        "display"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "description": "An object containing descriptions of API and UI views for the dataset.",
+                    "x-intellij-html-description": "<p>An object containing descriptions of API and UI views for the dataset.</p>",
+                    "markdownDescription": "An object containing descriptions of API and UI views for the dataset."
+                }
+            },
+            "anyOf": [
+                {
+                    "required": [
+                        "actorSpecification",
+                        "views"
+                    ]
+                },
+                {
+                    "required": [
+                        "actorSpecification",
+                        "fields"
+                    ]
+                }
+            ],
+            "additionalProperties": false
+        }
+    }
 }
