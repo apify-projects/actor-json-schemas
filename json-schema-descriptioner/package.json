@@ -37,10 +37,10 @@
         "lint": "eslint ./src --ext .ts",
         "lint:fix": "eslint ./src --ext .ts --fix",
         "test": "vitest",
-        "describe-actor-schema": "npm run start:dev -- -i ../json-schemes/actor.schema.json -d ../json-schemes-description/actor.schema.md -o ../output/actor.schema.json",
-        "describe-dataset-schema": "npm run start:dev -- -i ../json-schemes/dataset.schema.json -d ../json-schemes-description/dataset.schema.md -o ../output/dataset.schema.json",
-        "describe-input-schema": "npm run start:dev -- -i ../json-schemes/input.schema.json -d ../json-schemes-description/input.schema.md -o ../output/input.schema.json",
-        "describe-key-value-store-schema": "npm run start:dev -- -i ../json-schemes/key_value_store.schema.json -d ../json-schemes-description/key_value_store.schema.md -o ../output/key_value_store.schema.json",
-        "describe-output-schema": "npm run start:dev -- -i ../json-schemes/output.schema.json -d ../json-schemes-description/output.schema.md -o ../output/output.schema.json"
+        "describe-actor-schema": "npm run start:dev -- -i ../json-schemas/actor.schema.json -d ../json-schemas-description/actor.schema.md -o ../output/actor.schema.json",
+        "describe-dataset-schema": "npm run start:dev -- -i ../json-schemas/dataset.schema.json -d ../json-schemas-description/dataset.schema.md -o ../output/dataset.schema.json",
+        "describe-input-schema": "npm run start:dev -- -i ../json-schemas/input.schema.json -d ../json-schemas-description/input.schema.md -o ../output/input.schema.json",
+        "describe-key-value-store-schema": "npm run start:dev -- -i ../json-schemas/key_value_store.schema.json -d ../json-schemas-description/key_value_store.schema.md -o ../output/key_value_store.schema.json",
+        "describe-output-schema": "npm run start:dev -- -i ../json-schemas/output.schema.json -d ../json-schemas-description/output.schema.md -o ../output/output.schema.json"
     }
 }
