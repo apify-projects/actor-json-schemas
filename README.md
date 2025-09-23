@@ -67,8 +67,10 @@ Here's an example of how you would link the `input.schema.json` scheme in your `
         }
     }
 }
-
 ```
+
+Other editors may require you to install a separate plugin to use the JSON schemas for validation and 
+code-completion.
 
 ## Contributing
 
