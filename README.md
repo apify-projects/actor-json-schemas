@@ -1,6 +1,6 @@
 # Apify Actor JSON schemas
 
-Welcome to the official repository for JSON schemas for Apify Actors! This project aims to provide up-to-date and 
+Welcome to the **non-production ready** repository for JSON schemas for Apify Actors! This project aims to provide up-to-date and 
 publicly accessible JSON schemas to help developers build robust and error-free Apify Actors.
 
 ## The Problem
