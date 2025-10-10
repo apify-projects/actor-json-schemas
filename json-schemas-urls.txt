@@ -1,0 +1,5 @@
+https://apify.com/schemas/v1/actor.json
+https://apify.com/schemas/v1/input.json
+https://apify.com/schemas/v1/dataset.json
+https://apify.com/schemas/v1/key-value-store.json
+https://apify.com/schemas/v1/output.json
