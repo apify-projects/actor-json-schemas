@@ -31,13 +31,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: |
+            json-schema-modificator/package-lock.json
+            json-schema-bundler/package-lock.json
+
+      - name: Download JSON Schemas
+        run: bash ./scripts/download-json-schemas.sh
+
+      - name: Install modificator deps
+        working-directory: json-schema-modificator
+        run: npm ci
+
+      - name: Describe schemas (apply rules)
+        run: bash ./scripts/describe-json-schemas.sh
+
+      - name: Install bundler deps
+        working-directory: json-schema-bundler
+        run: npm ci
+
+      - name: Bundle schemas
+        run: bash ./scripts/bundle-json-schemas.sh
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: './output'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

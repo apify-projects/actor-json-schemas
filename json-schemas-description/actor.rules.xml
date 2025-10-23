@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Enchantments>
+    <!-- REPLACE VALUES -->
+    <ReplaceValue json-path="**/$id" type="js">
+        value.replace(/^https:\/\/apify.com\/schemas\/v1\//, 'https://apify.com/ide-schemas/v1/')
+    </ReplaceValue>
+    <ReplaceValue json-path="**/$ref" type="js">
+        value.replace(/^https:\/\/apify.com\/schemas\/v1\//, '')
+    </ReplaceValue>
+    <!-- ADD DESCRIPTIONS -->
+    <AddDescription json-path="/properties/actorSpecification" format="markdown">
+        The version of the Actor specification, **required** and must be an integer set to `1`.
+    </AddDescription>
+    <AddDescription json-path="/properties/name" format="markdown">
+        The **required** name of the Actor.
+    </AddDescription>
+    <AddDescription json-path="/properties/title" format="markdown">
+        A string for the title of the Actor.
+    </AddDescription>
+    <AddDescription json-path="/properties/description" format="markdown">
+        A string for a description of the Actor.
+    </AddDescription>
+    <AddDescription json-path="/properties/version" format="markdown">
+        The **required** version of the Actor, formatted as `[Number].[Number]` (e.g., `1.0`, `1.2.3`).
+    </AddDescription>
+    <AddDescription json-path="/properties/buildTag" format="markdown">
+        A string for the tag applied to a successful build; defaults to `latest`.
+    </AddDescription>
+    <AddDescription json-path="/properties/environmentVariables" format="markdown">
+        An object mapping environment variable names to their string values.
+    </AddDescription>
+    <AddDescription json-path="/properties/dockerfile" format="markdown">
+        A string specifying the path to the Dockerfile; defaults to `../Dockerfile`.
+    </AddDescription>
+    <AddDescription json-path="/properties/readme" format="markdown">
+        A string specifying the path to the README file; defaults to `../README.md`.
+    </AddDescription>
+    <ReplaceValue json-path="/properties/minMemoryMbytes" type="json">
+        {
+            "type": "integer",
+            "enum": [128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768]
+        }
+    </ReplaceValue>
+    <AddDescription json-path="/properties/minMemoryMbytes" format="markdown">
+        An integer between `128` and `32768` specifying the minimum memory in megabytes required.
+    </AddDescription>
+    <ReplaceValue json-path="/properties/maxMemoryMbytes" type="json">
+        {
+            "type": "integer",
+            "enum": [128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768]
+        }
+    </ReplaceValue>
+    <AddDescription json-path="/properties/maxMemoryMbytes" format="markdown">
+        An integer between `128` and `32768` specifying the maximum memory in megabytes allowed.
+    </AddDescription>
+    <AddDescription json-path="/properties/input" format="markdown">
+        Path or direct definition of the Actor's input schema.
+    </AddDescription>
+    <AddDescription json-path="/properties/inputSchema" format="markdown">
+        Path or direct definition of the Actor's input schema.
+    </AddDescription>
+    <AddDescription json-path="/properties/output" format="markdown">
+        Path or direct definition of the Actor's output schema.
+    </AddDescription>
+    <AddDescription json-path="/properties/outputSchema" format="markdown">
+        Path or direct definition of the Actor's output schema.
+    </AddDescription>
+    <AddDescription json-path="/properties/storages" format="markdown">
+        An object for defining schemas for different storage types.
+    </AddDescription>
+    <AddDescription json-path="/properties/storages/properties/keyValueStore" format="markdown">
+        Path or direct definition of the key-value store schema.
+    </AddDescription>
+    <AddDescription json-path="/properties/storages/properties/dataset" format="markdown">
+        Path or direct definition of the dataset schema, defining the structure of dataset items.
+    </AddDescription>
+    <AddDescription json-path="/properties/storages/properties/requestQueue" format="markdown">
+        Path for direct the request queue.
+    </AddDescription>
+    <AddDescription json-path="/properties/usesStandbyMode" format="markdown">
+        A boolean to enable Standby mode for the Actor.
+    </AddDescription>
+    <AddDescription json-path="/properties/webServerSchema" format="markdown">
+        Path or direct definition of the OpenAPI v3 schema of the Actor's web server.
+    </AddDescription>
+    <AddDescription json-path="/properties/webServerMcpPath" format="markdown">
+        Path of the streamable HTTP MCP endpoint exposed by the standby Actor
+    </AddDescription>
+</Enchantments>

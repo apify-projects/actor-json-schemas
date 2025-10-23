@@ -1,6 +1,6 @@
 ---
 name: Actor JSON Schema Issue
-about: For reporiting Actor JSON Schema Issues.
+about: For reporting Actor JSON Schema Issues.
 title: ''
 labels: bug
 assignees: JJetmar

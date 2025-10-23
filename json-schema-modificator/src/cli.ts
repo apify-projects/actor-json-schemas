@@ -5,7 +5,7 @@ import path from 'node:path';
 import { program } from 'commander';
 
 import { enchantJsonSchema, parseJsonContent } from './utils.js';
-import { parseDescriptionFile } from './description-file-utils.js';
+import { parseRuleFile } from './description-file-utils.js';
 
 program
     .description('Generate a JSON-schema with property descriptions based on markdown file')
@@ -36,9 +36,9 @@ if (!await fs.stat(descriptionFilepath).catch(() => false)) {
     process.exit(1);
 }
 
-const parsedDescriptionFile = parseDescriptionFile(await fs.readFile(descriptionFilepath, 'utf8'));
+const enchantmentsRules = parseRuleFile(await fs.readFile(descriptionFilepath, 'utf8'));
 
-const enchantedJsonSchema = await enchantJsonSchema(jsonSchemaParsed, parsedDescriptionFile);
+const enchantedJsonSchema = await enchantJsonSchema(jsonSchemaParsed, enchantmentsRules);
 const output = JSON.stringify(enchantedJsonSchema, null, 4)
 
 if (options.output) {
