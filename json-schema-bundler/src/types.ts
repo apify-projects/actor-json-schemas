@@ -6,5 +6,5 @@ export type JsonSchemaValue = Primitive | Object | Arr;
 
 export interface JsonSchemaObject {
     [member: string]: JsonSchemaValue;
-    $defs?: Record<string, JsonSchemaObject>;
+    definitions?: Record<string, JsonSchemaObject>;
 }

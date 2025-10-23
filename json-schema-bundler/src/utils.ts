@@ -50,6 +50,20 @@ function md5(input: string): string {
 
 async function includeJsonByPath(absolutePath: string) {
     try {
+        if (/^https?:\/\//.test(absolutePath)) {
+            const res = await fetch(absolutePath).catch(() => {
+                console.error(`Problem during fetching "${absolutePath}"!`);
+                process.exit(1);
+            });
+            if (!res.ok) {
+                console.error(`Problem during fetching "${absolutePath}" HTTP ${res.status} ${res.statusText}!`);
+                process.exit(1);
+            }
+            return await res.json().catch(() => {
+                console.error(`Problem during parsing JSON from "${absolutePath}"!`);
+                process.exit(1);
+            });
+        }
         return JSON.parse(await fs.readFile(absolutePath, 'utf8'));
     } catch (error) {
         if (error instanceof Error) {
@@ -87,8 +101,7 @@ export async function scopeJsonSchema(
     for (const { value, jsonPointer, parent, key } of iterateJsonProperties(jsonSchema)) {
         const REF_ATTRIBUTE = '$ref';
 
-        if (parent?.value && Object.keys(parent.value).length === 1
-            && key === REF_ATTRIBUTE && value && typeof value === 'string'
+        if (parent?.value && key === REF_ATTRIBUTE && value && typeof value === 'string'
         ) {
             const [refRelativeFilePath, anchorPath] = value?.trim().split('#');
 
@@ -101,36 +114,41 @@ export async function scopeJsonSchema(
                 }
                 parent.value[REF_ATTRIBUTE] += `${anchorPath}`;
                 console.log("Scoping ", jsonPointer , `${prefix}#${anchorPath}`);
-            } else if (refRelativeFilePath && value.startsWith('https://') || value.startsWith('http://')) {
-                console.log("Skipping external resource:", jsonPointer , value);
             } else if (refRelativeFilePath) {
-                // External file reference
-                const externalSchemaAbsolutePath = path.resolve(path.dirname(filePath), refRelativeFilePath);
-                const externalSchemaFilename = path.basename(externalSchemaAbsolutePath);
+                // External reference (could be a local file path or an absolute URL)
+                const isUrl = /^https?:\/\//.test(refRelativeFilePath);
+                const externalSchemaAbsolutePath = isUrl
+                    ? refRelativeFilePath
+                    : path.resolve(path.dirname(filePath), refRelativeFilePath);
+
+                const externalSchemaFilename = isUrl
+                    ? externalSchemaAbsolutePath
+                    : path.basename(externalSchemaAbsolutePath);
 
                 const defKey = externalSchemaFilename
-                    .replace(/\W/g, '-')
+                    .replace(/^https?:\/\//gi, '')
+                    .replace(/[\W_]/g, '-')
                     .replace(/^-+|-+$/g, '')
                     .concat('-', md5(externalSchemaAbsolutePath));
 
-                mainJsonSchema.$defs ??= {};
+                mainJsonSchema.definitions ??= {};
 
-                parent.value[REF_ATTRIBUTE] = `#/$defs/${defKey}`;
+                parent.value[REF_ATTRIBUTE] = `#/definitions/${defKey}`;
                 if (anchorPath) {
                     parent.value[REF_ATTRIBUTE] += `/${anchorPath}`;
                 }
 
-                if (mainJsonSchema.$defs[defKey]) {
+                if (mainJsonSchema.definitions[defKey]) {
                     // already exists
                     continue;
                 }
 
                 const externalSchema = await includeJsonByPath(externalSchemaAbsolutePath);
-                mainJsonSchema.$defs[defKey] = await scopeJsonSchema(
+                mainJsonSchema.definitions[defKey] = await scopeJsonSchema(
                     externalSchemaAbsolutePath,
                     mainJsonSchema,
                     externalSchema,
-                    `${defKey}${(anchorPath ? anchorPath : '')}`,
+                    `/definitions/${defKey}${(anchorPath ? anchorPath : '')}`,
                 );
             } else {
                 console.error('Invalid reference: ', jsonPointer, value);

@@ -4,7 +4,7 @@ import type { CheerioAPI, Node } from 'cheerio';
 import * as cheerio from 'cheerio';
 import { isPlainJsonObject } from '../utils.js';
 
-const RULE_NAME = 'AddDescription' as const;
+export const RULE_NAME = 'AddDescription' as const;
 
 export interface AddDescriptionRule extends AbstractRule<typeof RULE_NAME> {
     format: 'markdown';

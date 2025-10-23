@@ -1,5 +1,6 @@
 import { AddDescriptionRule } from './rules/add-description-rule.js';
 import { ReplaceValueRule } from './rules/replace-value-rule.js';
+import { RemoveValueRule } from "./rules/remove-value-rule.js";
 
 type Primitive = string | number | boolean | null | undefined;
 
@@ -25,4 +26,4 @@ export interface AbstractRule<TYPE extends string> {
 }
 
 // RULES
-export type Rule = AddDescriptionRule | ReplaceValueRule;
+export type Rule = AddDescriptionRule | ReplaceValueRule | RemoveValueRule;

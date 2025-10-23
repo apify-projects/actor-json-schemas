@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Enchantments>
-    <!-- REPLACE VALUES -->
-    <ReplaceValue json-path="**/$id" type="js">
-        value.replace(/^https:\/\/apify.com\/schemas\/v1\//, 'https://apify.com/ide-schemas/v1/')
+    <!-- REMOVE/REPLACE VALUES -->
+    <RemoveValue json-path="**/$id" />
+    <!-- We need to use relative paths as later these will include json-schemas with descriptions -->
+    <ReplaceValue json-path="**/$ref" type="js">
+        value.replace(/^https:\/\/apify.com\/schemas\/v1\//, '')
+    </ReplaceValue>
+    <ReplaceValue json-path="/properties/inputSchema/oneOf" type="json">
+        [{ "type": "string" }, { "$ref": "input.json" }]
+    </ReplaceValue>
+    <ReplaceValue json-path="/properties/input/oneOf" type="json">
+        [{ "type": "string" }, { "$ref": "input.json" }]
     </ReplaceValue>
     <ReplaceValue json-path="**/$ref" type="js">
         value.replace(/^https:\/\/apify.com\/schemas\/v1\//, '')

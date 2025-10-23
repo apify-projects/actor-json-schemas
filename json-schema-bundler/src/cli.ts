@@ -22,7 +22,7 @@ if (!await fs.stat(inputPath).catch(() => false)) {
 }
 
 const enchantedJsonSchema = await bundleJsonSchema(inputPath);
-const output = JSON.stringify(enchantedJsonSchema, null, 4);
+const output = JSON.stringify(enchantedJsonSchema, null, 2);
 
 if (options.output) {
     // Output to the file
