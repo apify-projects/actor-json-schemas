@@ -67,3 +67,7 @@ typings/
 # InteliJ Idea
 .idea
 
+
+# InteliJ Idea
+output/
+downloaded-json-schemas/

@@ -1,12 +1,8 @@
 import { Rule } from './types.js';
 import { load as cheerioLoad } from 'cheerio';
-import { parseAddDescriptionRule } from './rules/add-description-rule.js';
-import { parseReplaceValueRule } from './rules/replace-value-rule.js';
-
-enum RuleType {
-    AddDescription = 'AddDescription',
-    ReplaceValue = 'ReplaceValue',
-}
+import * as addDescriptionRule from './rules/add-description-rule.js';
+import * as replaceValueRule from './rules/replace-value-rule.js';
+import * as removeValueRule from './rules/remove-value-rule.js';
 
 export function parseRuleFile(ruleFileContent: string): Rule[] {
     const supportedRules: Rule[] = [];
@@ -18,11 +14,14 @@ export function parseRuleFile(ruleFileContent: string): Rule[] {
 
         let rule: Rule | null = null;
         switch (tagName) {
-            case RuleType.AddDescription:
-                rule = parseAddDescriptionRule($, ruleElement);
+            case addDescriptionRule.RULE_NAME:
+                rule = addDescriptionRule.parseAddDescriptionRule($, ruleElement);
                 break;
-            case RuleType.ReplaceValue:
-                rule = parseReplaceValueRule($, ruleElement);
+            case replaceValueRule.RULE_NAME:
+                rule = replaceValueRule.parseReplaceValueRule($, ruleElement);
+                break;
+            case removeValueRule.RULE_NAME:
+                rule = removeValueRule.parseReplaceValueRule($, ruleElement);
                 break;
             default:
                 console.warn(`Unknown Rule "${tagName}", skipping...`);

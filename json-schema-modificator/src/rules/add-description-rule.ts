@@ -4,14 +4,14 @@ import type { CheerioAPI, Node } from 'cheerio';
 import * as cheerio from 'cheerio';
 import { isPlainJsonObject } from '../utils.js';
 
-const RULE_NAME = 'AddDescription' as const;
+export const RULE_NAME = 'AddDescription' as const;
 
 export interface AddDescriptionRule extends AbstractRule<typeof RULE_NAME> {
     format: 'markdown';
     contentInMarkdown: string;
 }
 
-function reindent(code: string): string {
+function reindentMarkdown(code: string): string {
     if (!code) {
         return code;
     }
@@ -67,7 +67,9 @@ function formatSimpleDescription(markdownContent: string): string | undefined {
         }
     });
 
-    return descriptionElement.text().trim() || undefined;
+    return descriptionElement.text()
+        .replace(/\s*\n\s*/g, ' ') // no new lines in plain Descriptions
+        .trim() || undefined;
 }
 
 function processAddDescriptionRule(objectPropertyInfo: ObjectPropertyInfo, rule: Omit<AddDescriptionRule, '__apply'>) {
@@ -75,7 +77,7 @@ function processAddDescriptionRule(objectPropertyInfo: ObjectPropertyInfo, rule:
 
     if (propertyObject && isPlainJsonObject(propertyObject)) {
         const propertyObject = objectPropertyInfo.value as JsonObject;
-        const reindentedContentInMarkdown = reindent(rule.contentInMarkdown);
+        const reindentedContentInMarkdown = reindentMarkdown(rule.contentInMarkdown);
         propertyObject['description'] = formatSimpleDescription(reindentedContentInMarkdown);
         propertyObject['x-intellij-html-description'] ??= formatInteliJDescription(reindentedContentInMarkdown);
         propertyObject['markdownDescription'] ??= formatVsCodeDescription(reindentedContentInMarkdown);

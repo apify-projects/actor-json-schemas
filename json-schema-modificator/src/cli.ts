@@ -39,7 +39,7 @@ if (!await fs.stat(descriptionFilepath).catch(() => false)) {
 const enchantmentsRules = parseRuleFile(await fs.readFile(descriptionFilepath, 'utf8'));
 
 const enchantedJsonSchema = await enchantJsonSchema(jsonSchemaParsed, enchantmentsRules);
-const output = JSON.stringify(enchantedJsonSchema, null, 4)
+const output = JSON.stringify(enchantedJsonSchema, null, 2)
 
 if (options.output) {
     // Output to the file

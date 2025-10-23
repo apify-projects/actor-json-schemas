@@ -2,7 +2,7 @@ import { AbstractRule, ObjectPropertyInfo } from '../types.js';
 import type { CheerioAPI, Node } from 'cheerio';
 import vm from 'vm';
 
-const RULE_NAME = 'ReplaceValue' as const;
+export const RULE_NAME = 'ReplaceValue' as const;
 
 export interface ReplaceValueRule extends AbstractRule<typeof RULE_NAME> {
     type: 'json' | 'js';
