@@ -54,7 +54,7 @@ Here's an example of how you would link the validation json schema in your `INPU
 
 ```json
 {
-    "$schema": "https://apify-projects.github.io/actor-json-schemas/input.json?v=0.2",
+    "$schema": "https://apify-projects.github.io/actor-json-schemas/input.json?v=0.3",
     "type": "object",
     "schemaVersion": 1,
     "title": "Data scraper Input",
