@@ -25,23 +25,23 @@ We currently offer schemas for the following Apify Actor JSON files:
 
 -   **`actor.json`**: For defining the Actor's configuration.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/actor.json?v=0.2`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/actor.json?v=0.3`
 
 -   **`dataset.json`**: For validating data in a dataset.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/dataset.json?v=0.2`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/dataset.json?v=0.3`
 
 -   **`input.json`**: For the Actor's input.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/input.json?v=0.2`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/input.json?v=0.3`
 
 -   **`key-value-store.json`**: For data within the key-value store.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/key-value-store.json?v=0.2`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/key-value-store.json?v=0.3`
 
 -   **`output.json`**: For the Actor's output.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/output.json?v=0.2`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/output.json?v=0.3`
 
 
 ## How to Use a Scheme in Your Editor

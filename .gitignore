@@ -68,6 +68,6 @@ typings/
 .idea
 
 
-# InteliJ Idea
+# Project temporary files
 output/
 downloaded-json-schemas/
