@@ -1,8 +1,8 @@
-import { AbstractRule, JsonObject, ObjectPropertyInfo } from '../types.js';
+import {AbstractRule, JsonObject, JsonValue, ObjectPropertyInfo} from '../types.js';
 import showdown from 'showdown';
 import type { CheerioAPI, Node } from 'cheerio';
 import * as cheerio from 'cheerio';
-import { isPlainJsonObject } from '../utils.js';
+import { getJsonValue, isPlainJsonObject } from '../utils.js';
 
 export const RULE_NAME = 'AddDescription' as const;
 
@@ -72,15 +72,15 @@ function formatSimpleDescription(markdownContent: string): string | undefined {
         .trim() || undefined;
 }
 
-function processAddDescriptionRule(objectPropertyInfo: ObjectPropertyInfo, rule: Omit<AddDescriptionRule, '__apply'>) {
-    const propertyObject = objectPropertyInfo.value;
+function processAddDescriptionRule(objectPropertyInfo: ObjectPropertyInfo, json: JsonObject, rule: Omit<AddDescriptionRule, '__apply'>) {
+    const propertyObject = getJsonValue<Record<string, JsonValue>>(json, objectPropertyInfo.jsonPointer);
 
-    if (propertyObject && isPlainJsonObject(propertyObject)) {
-        const propertyObject = objectPropertyInfo.value as JsonObject;
+    if (propertyObject.value && isPlainJsonObject(propertyObject.value)) {
         const reindentedContentInMarkdown = reindentMarkdown(rule.contentInMarkdown);
-        propertyObject['description'] = formatSimpleDescription(reindentedContentInMarkdown);
-        propertyObject['x-intellij-html-description'] ??= formatInteliJDescription(reindentedContentInMarkdown);
-        propertyObject['markdownDescription'] ??= formatVsCodeDescription(reindentedContentInMarkdown);
+
+        propertyObject.value['description'] = formatSimpleDescription(reindentedContentInMarkdown);
+        propertyObject.value['x-intellij-html-description'] ??= formatInteliJDescription(reindentedContentInMarkdown);
+        propertyObject.value['markdownDescription'] ??= formatVsCodeDescription(reindentedContentInMarkdown);
     } else {
         console.warn(`Cannot add description to "${objectPropertyInfo.jsonPointer}" (not and object type)!`);
     }
@@ -98,7 +98,7 @@ export function parseAddDescriptionRule($: CheerioAPI, ruleElement: Node): AddDe
         } as const;
         return {
             ...rule,
-            __apply: (objectPropertyInfo: ObjectPropertyInfo) => processAddDescriptionRule(objectPropertyInfo, rule),
+            __apply: (objectPropertyInfo: ObjectPropertyInfo, json: JsonObject) => processAddDescriptionRule(objectPropertyInfo, json, rule),
         }
     } else {
         console.warn(`Unknown format "${format}", skipping...`);

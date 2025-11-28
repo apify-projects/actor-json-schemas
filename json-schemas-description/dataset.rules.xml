@@ -7,6 +7,17 @@
     <!-- We need to use relative paths as later these will include json-schemas with descriptions -->
     <ReplaceValue json-path="**/$ref" type="js">
         value.replace(/^https:\/\/apify.com\/schemas\/v1\//, '')
+             .replace(/^http:\/\/json-schema\.org\/draft-07\/schema.*/, 'draft-07-schema.json')
+    </ReplaceValue>
+    <!-- In the original schema these attributes have additionalProperties true, which is not great for code auto-complete -->
+    <ReplaceValue json-path="/properties/views/patternProperties/^" type="js">
+        ({ ...value, additionalProperties: false })
+    </ReplaceValue>
+    <ReplaceValue json-path="/properties/views/patternProperties/^/properties/transformation" type="js">
+        ({ ...value, additionalProperties: false })
+    </ReplaceValue>
+    <ReplaceValue json-path="/" type="js">
+        ({ ...value, additionalProperties: false })
     </ReplaceValue>
     <!-- ADD DESCRIPTIONS -->
     <AddDescription json-path="/properties/actorSpecification" format="markdown">

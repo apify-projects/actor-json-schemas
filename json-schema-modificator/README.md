@@ -10,7 +10,7 @@ What it does
 CLI usage
 
 ```bash
-markdown-to-json-schema-generator -i <file> [-d <rules-file>] [-o <file>]
+json-schema-modificator -i <file> [-d <rules-file>] [-o <file>]
 ```
 
 Options
@@ -81,19 +81,19 @@ Examples (CLI)
 - Print modified schema to stdout using an explicit rules file
 
 ```bash
-markdown-to-json-schema-generator -i ./downloaded-json-schemas/input.json -d ./json-schemas-description/input.rules.xml
+json-schema-modificator -i ./downloaded-json-schemas/input.json -d ./json-schemas-description/input.rules.xml
 ```
 
 - Write output to a file
 
 ```bash
-markdown-to-json-schema-generator -i ./downloaded-json-schemas/input.json -d ./json-schemas-description/input.rules.xml -o ./output/input.json
+json-schema-modificator -i ./downloaded-json-schemas/input.json -d ./json-schemas-description/input.rules.xml -o ./output/input.json
 ```
 
 - Overwrite in-place
 
 ```bash
-markdown-to-json-schema-generator -i ./output/input.json -d ./json-schemas-description/input.rules.xml -o ./output/input.json
+json-schema-modificator -i ./output/input.json -d ./json-schemas-description/input.rules.xml -o ./output/input.json
 ```
 
 See also

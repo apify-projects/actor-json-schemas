@@ -1,6 +1,7 @@
-import { AbstractRule, ObjectPropertyInfo } from '../types.js';
+import { AbstractRule, JsonObject, ObjectPropertyInfo } from '../types.js';
 import type { CheerioAPI, Node } from 'cheerio';
 import vm from 'vm';
+import { getJsonValue } from "../utils.js";
 
 export const RULE_NAME = 'ReplaceValue' as const;
 
@@ -9,18 +10,16 @@ export interface ReplaceValueRule extends AbstractRule<typeof RULE_NAME> {
     content: string;
 }
 
-function replaceByJsonValue(objectPropertyInfo: ObjectPropertyInfo, rule: Omit<ReplaceValueRule, '__apply'>) {
-    if (objectPropertyInfo.parent?.value) {
-        objectPropertyInfo.parent.value[objectPropertyInfo.key] = JSON.parse(rule.content);
-    }
+function replaceByJsonValue(objectPropertyInfo: ObjectPropertyInfo, rule: Omit<ReplaceValueRule, '__apply'>, json: JsonObject) {
+    const valueHolder = getJsonValue(json, objectPropertyInfo.jsonPointer);
+    valueHolder.value = JSON.parse(rule.content);
 }
 
-function replaceByJsValue(objectPropertyInfo: ObjectPropertyInfo, rule: Omit<ReplaceValueRule, '__apply'>) {
-    if (objectPropertyInfo.parent?.value) {
-        objectPropertyInfo.parent.value[objectPropertyInfo.key] = vm.runInNewContext(rule.content, {
-            value: objectPropertyInfo.value,
-        });
-    }
+function replaceByJsValue(objectPropertyInfo: ObjectPropertyInfo, rule: Omit<ReplaceValueRule, '__apply'>, json: JsonObject) {
+    const valueHolder = getJsonValue(json, objectPropertyInfo.jsonPointer);
+    valueHolder.value = vm.runInNewContext(rule.content, {
+        value: valueHolder.value,
+    });
 }
 
 export function parseReplaceValueRule($: CheerioAPI, ruleElement: Node): ReplaceValueRule | null {
@@ -35,7 +34,7 @@ export function parseReplaceValueRule($: CheerioAPI, ruleElement: Node): Replace
         } as const;
         return {
             ...rule,
-            __apply: (objectPropertyInfo: ObjectPropertyInfo) => replaceByJsonValue(objectPropertyInfo, rule),
+            __apply: (objectPropertyInfo: ObjectPropertyInfo, json: JsonObject) => replaceByJsonValue(objectPropertyInfo, rule, json),
         } satisfies ReplaceValueRule;
     } else if (type === 'js') {
         const rule = {
@@ -46,7 +45,7 @@ export function parseReplaceValueRule($: CheerioAPI, ruleElement: Node): Replace
         } as const;
         return {
             ...rule,
-            __apply: (objectPropertyInfo: ObjectPropertyInfo) => replaceByJsValue(objectPropertyInfo, rule),
+            __apply: (objectPropertyInfo: ObjectPropertyInfo, json: JsonObject) => replaceByJsValue(objectPropertyInfo, rule, json),
         } satisfies ReplaceValueRule;
     } else {
         console.warn(`Unknown format "${type}", skipping...`);

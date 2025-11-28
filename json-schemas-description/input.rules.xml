@@ -37,13 +37,6 @@
     <AddDescription json-path="/properties/properties" format="markdown">
         This is an object mapping each field key to its specification.
     </AddDescription>
-    <AddDescription json-path="/properties/properties/patternProperties" format="markdown">
-        The provided documentation for Actor input schema specification does not directly describe `patternProperties`.
-        This is a JSON Schema keyword used in the JSON validation schema itself to indicate that properties matching a
-        regular expression pattern are allowed. In the context of the Actor input schema, it implies that the
-        `properties` object can contain any field key, as long as its value conforms to one of the defined field types
-        (string, array, object, etc.).
-    </AddDescription>
     <AddDescription json-path="/definitions/stringEnumProperty/properties/enum" format="markdown">
         Using this field, you can limit values to the given array of strings. Input will be displayed as select box.
     </AddDescription>

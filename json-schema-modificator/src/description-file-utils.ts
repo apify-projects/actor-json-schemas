@@ -21,7 +21,7 @@ export function parseRuleFile(ruleFileContent: string): Rule[] {
                 rule = replaceValueRule.parseReplaceValueRule($, ruleElement);
                 break;
             case removeValueRule.RULE_NAME:
-                rule = removeValueRule.parseReplaceValueRule($, ruleElement);
+                rule = removeValueRule.parseRemoveValueRule($, ruleElement);
                 break;
             default:
                 console.warn(`Unknown Rule "${tagName}", skipping...`);

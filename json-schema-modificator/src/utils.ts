@@ -26,12 +26,19 @@ function *iterateJsonProperties(input: JsonObject, parentJsonPath = ''): Generat
         return;
     }
 
-    for (const [key, value] of Object.entries(input)) {
+    if (parentJsonPath === '') {
+        yield ({
+            value: input,
+            jsonPointer: '/',
+        });
+    }
+
+    for (const key of Object.keys(input)) {
         const jsonPointer = `${parentJsonPath}/${key}`;
         const parentKey = `${parentJsonPath}`.split(/\//g).pop()!;
 
-        if (isIterable(value)) {
-            const objectValue = value as JsonObject;
+        if (isIterable(input[key])) {
+            const objectValue = input[key] as JsonObject;
             yield ({
                 key,
                 value: objectValue,
@@ -47,7 +54,7 @@ function *iterateJsonProperties(input: JsonObject, parentJsonPath = ''): Generat
                 yield result;
             }
         } else {
-            const objectValue = value as JsonValue;
+            const objectValue = input[key] as JsonValue;
             yield ({
                 key,
                 value: objectValue,
@@ -58,6 +65,42 @@ function *iterateJsonProperties(input: JsonObject, parentJsonPath = ''): Generat
                     jsonPointer: parentJsonPath ?? '/',
                 }
             });
+        }
+    }
+}
+
+export function getJsonValue<T>(json: JsonObject, jsonPointer: string): { value: T } {
+    if (jsonPointer === '/') {
+        return {
+            get value(): T {
+                return json as T;
+            },
+            set value(value: T) {
+                for (const key in json) {
+                    delete json[key];
+                }
+                Object.assign(json, value);
+            }
+        }
+    }
+
+    const parts = jsonPointer.split('/');
+    let current: any = json;
+    let parent: any = json;
+    let lastPart = parts.slice(-1)[0];
+    for (const part of parts) {
+        if (current[part]) {
+            parent = current;
+            current = current[part];
+        }
+    }
+
+    return {
+        get value(): T {
+            return current;
+        },
+        set value(value: T) {
+            parent[lastPart] = value;
         }
     }
 }
@@ -96,7 +139,7 @@ export async function enchantJsonSchema(
             .filter((enchantmentRule) => matchesJsonPointer(enchantmentRule.jsonPath, jsonPointer));
 
         for (const relatedRule of relatedRules) {
-            relatedRule.__apply(jsonPropertyInfo);
+            relatedRule.__apply(jsonPropertyInfo, jsonSchema);
         }
     }
 

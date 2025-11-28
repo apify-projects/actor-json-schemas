@@ -1,5 +1,5 @@
 {
-    "name": "markdown-to-json-schema-generator",
+    "name": "json-schema-modificator",
     "version": "0.0.1",
     "type": "module",
     "description": "A simple and zero-opinion typescript starter template for building cross-platform command line applications.",
@@ -33,6 +33,7 @@
     "scripts": {
         "start": "npm run start:dev",
         "start:dev": "tsx src/cli.ts",
+        "start:test": "tsx src/cli.ts -i ../downloaded-json-schemas/actor.json -d ../json-schemas-description/actor.rules.xml -o ../output/actor.json",
         "build": "tsc",
         "lint": "eslint ./src --ext .ts",
         "lint:fix": "eslint ./src --ext .ts --fix",

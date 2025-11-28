@@ -8,6 +8,11 @@
     <ReplaceValue json-path="**/$ref" type="js">
         value.replace(/^https:\/\/apify.com\/schemas\/v1\//, '')
     </ReplaceValue>
+    <!-- In the original schema these attributes have default additionalProperties true, which is not great for code
+    auto-completion -->
+    <ReplaceValue json-path="/" type="js">
+        ({ ...value, additionalProperties: false })
+    </ReplaceValue>
     <!-- ADD DESCRIPTIONS -->
     <AddDescription json-path="/properties/actorOutputSchemaVersion" format="markdown">
         The version of the output schema. It's a required integer field with a minimum and maximum value of 1.
@@ -21,10 +26,6 @@
     <AddDescription json-path="/properties/properties" format="markdown">
         Definition the output properties of the Actor. Its keys are the names of the output properties, and its values
         are objects that define each property's schema.
-    </AddDescription>
-    <AddDescription json-path="/properties/properties/patternProperties" format="markdown">
-        Single output property. It must contain the `type` and `template` attributes. It can also include `title`,
-        `description`, and `resourceType`.
     </AddDescription>
     <AddDescription json-path="/properties/properties/patternProperties/^/properties/title" format="markdown">
         Title for the specific output property.

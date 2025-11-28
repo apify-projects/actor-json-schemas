@@ -1,20 +1,21 @@
-import { AbstractRule, ObjectPropertyInfo } from '../types.js';
+import { AbstractRule, JsonObject, ObjectPropertyInfo } from '../types.js';
 import type { CheerioAPI, Node } from 'cheerio';
+import { getJsonValue } from "../utils.js";
 
 export const RULE_NAME = 'RemoveValue' as const;
 
 export interface RemoveValueRule extends AbstractRule<typeof RULE_NAME> {}
 
-function removeValue(objectPropertyInfo: ObjectPropertyInfo) {
-    if (objectPropertyInfo.parent?.value !== undefined) {
-        objectPropertyInfo.parent.value[objectPropertyInfo.key] = undefined;
-    }
+function removeValue(objectPropertyInfo: ObjectPropertyInfo, json: JsonObject) {
+    const s = getJsonValue(json, objectPropertyInfo.jsonPointer);
+
+    s.value = undefined;
 }
 
-export function parseReplaceValueRule($: CheerioAPI, ruleElement: Node): RemoveValueRule | null {
+export function parseRemoveValueRule($: CheerioAPI, ruleElement: Node): RemoveValueRule | null {
     return {
         __type: RULE_NAME,
         jsonPath: $(ruleElement).attr('json-path')!,
-        __apply: (objectPropertyInfo: ObjectPropertyInfo) => removeValue(objectPropertyInfo),
+        __apply: (objectPropertyInfo: ObjectPropertyInfo, json: JsonObject) => removeValue(objectPropertyInfo, json),
     } satisfies RemoveValueRule;
 }

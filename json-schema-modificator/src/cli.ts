@@ -25,7 +25,13 @@ if (!await fs.stat(inputPath).catch(() => false)) {
 const parsedInputPath = path.parse(inputPath);
 
 const jsonSchemaFileContent = await fs.readFile(inputPath, 'utf8');
-const jsonSchemaParsed = parseJsonContent(jsonSchemaFileContent);
+let jsonSchemaParsed;
+try {
+    jsonSchemaParsed = parseJsonContent(jsonSchemaFileContent);
+} catch (e) {
+    console.error(`Problem during parsing JSON file "${inputPath}"!`);
+    process.exit(1);
+}
 
 const DEFAULT_DESCRIPTION_FILEPATH = `${parsedInputPath.dir}/${parsedInputPath.name}`
     + `.description.md`;
