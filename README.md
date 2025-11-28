@@ -25,23 +25,23 @@ We currently offer schemas for the following Apify Actor JSON files:
 
 -   **`actor.json`**: For defining the Actor's configuration.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/actor.json?v=0.3`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/actor.json?v=0.4`
 
 -   **`dataset.json`**: For validating data in a dataset.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/dataset.json?v=0.3`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/dataset.json?v=0.4`
 
 -   **`input.json`**: For the Actor's input.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/input.json?v=0.3`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/input.json?v=0.4`
 
 -   **`key-value-store.json`**: For data within the key-value store.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/key-value-store.json?v=0.3`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/key-value-store.json?v=0.4`
 
 -   **`output.json`**: For the Actor's output.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/output.json?v=0.3`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/output.json?v=0.4`
 
 
 ## How to Use a Scheme in Your Editor
@@ -54,7 +54,7 @@ Here's an example of how you would link the validation json schema in your `INPU
 
 ```json
 {
-    "$schema": "https://apify-projects.github.io/actor-json-schemas/input.json?v=0.3",
+    "$schema": "https://apify-projects.github.io/actor-json-schemas/input.json?v=0.4",
     "type": "object",
     "schemaVersion": 1,
     "title": "Data scraper Input",
