@@ -55,4 +55,4 @@ Exit codes
 - 1: Input file cannot be read or another fatal error occurred
 
 See also
-- Repository helper script that uses this tool: ./scripts/bundle-json-schemas.sh
+- Repository helper script that uses this tool: ./scripts/03_bundle-json-schemas.sh
