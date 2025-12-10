@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# This script iterates over downloaded JSON Schemas and applies description rules
-# using the json-schema-modificator CLI for each file.
+# This script iterates over described JSON Schemas and applies modification rules
+# using the json-schema-modificator CLI for each file to produce *.ide.json files.
 #
 # Expected layout (relative to repo root):
-# - ./downloaded-json-schemas/*.json        # input schemas (downloaded earlier)
-# - ./json-schemas-description/*.rules.xml  # rules per schema name
+# - ./output/*.json                         # input schemas (after describe step)
+# - ./rules/modifications/*.modification-rules.xml  # rules per schema name
 # - ./output/                               # output directory
 
-ROOT_DIR="$(dirname "$0")/.."
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
 INPUT_DIR="$ROOT_DIR/output" # We are using the output from previous step (JSON description) as an input for this one
 RULES_DIR="$ROOT_DIR/rules/modifications"
 OUTPUT_DIR="$ROOT_DIR/output"
@@ -27,7 +27,7 @@ if [[ ${#schemas[@]} -eq 0 ]]; then
 fi
 
 for input_path in "${schemas[@]}"; do
-  echo "input_path $input_path ..."
+  echo "Processing $input_path ..."
 
   base_name="$(basename "$input_path")"           # e.g. actor.json
   name_no_ext="${base_name%.json}"                # e.g. actor
@@ -38,7 +38,7 @@ for input_path in "${schemas[@]}"; do
     continue
   fi
 
-  echo "Describing $base_name using rules $rules_path ..."
+  echo "Modifying $base_name using rules $rules_path ..."
   # Run the CLI via the package's dev script, so we don't need to build first.
   # We run it from inside the package directory to reuse its tsx entry.
   (

@@ -74,27 +74,27 @@ JS replacement
 
 Notes
 - json-path must be an exact JSON Pointer (e.g., /properties/foo/type). Arrays are addressed by 0‑based indices (e.g., /items/0/type).
-- Wildcard matching is very simple: only paths that start with ** are treated as "match any prefix" and then must end with the remainder. There is no full globbing.
+- Wildcard matching is basic: only paths that start with ** are treated as "match any prefix" and then must end with the remainder. There is no full globbing.
 - The tool deep‑copies the input schema internally before applying changes.
 
 Examples (CLI)
-- Print modified schema to stdout using an explicit rules file
+- Print modified schema to stdout using an explicit description rules file
 
 ```bash
-json-schema-modificator -i ./downloaded-json-schemas/input.json -d ./json-schemas-description/input.rules.xml
+json-schema-modificator -i ./downloaded-json-schemas/input.json -d ./rules/add-description/input.description-rules.xml
 ```
 
 - Write output to a file
 
 ```bash
-json-schema-modificator -i ./downloaded-json-schemas/input.json -d ./json-schemas-description/input.rules.xml -o ./output/input.json
+json-schema-modificator -i ./downloaded-json-schemas/input.json -d ./rules/add-description/input.description-rules.xml -o ./output/input.json
 ```
 
 - Overwrite in-place
 
 ```bash
-json-schema-modificator -i ./output/input.json -d ./json-schemas-description/input.rules.xml -o ./output/input.json
+json-schema-modificator -i ./output/input.json -d ./rules/add-description/input.description-rules.xml -o ./output/input.json
 ```
 
 See also
-- Repository helper script that uses this tool: ./scripts/describe-json-schemas.sh
+- Repository helper script that uses this tool: ./scripts/01_describe-json-schemas.sh

@@ -1,7 +1,7 @@
 # Apify Actor JSON schemas
 
-Welcome to the **non-production ready** repository for JSON schemas for Apify Actors! This project aims to provide up-to-date and 
-publicly accessible JSON schemas to help developers build robust and error-free Apify Actors.
+Welcome to the workflow repository of processing JSON Schemas for Apify Actor JSON files! This project aims to provide workflow for
+up-to-date and publicly accessible JSON schemas to help developers build robust and error-free Apify Actors.
 
 ## The Problem
 
@@ -10,10 +10,10 @@ files can be prone to errors, which can lead to issues later when the Actor is r
 
 ## Our Solution
 
-We've created a set of JSON schemas that you can use to validate your Actor's JSON files _before_ you push them to the 
+We've created a set of JSON Schemas that you can use to validate your Actor's JSON files _before_ you push them to the 
 platform. By adding these schemas to your project, you gain two major benefits:
 
-1.  **Validation:** Supported code editors can use the scheme to check your JSON file for syntax errors and schema 
+1.  **Validation:** Supported code editors can use the schema to check your JSON file for syntax errors and schema 
     compliance. This helps you catch mistakes early.
 
 2.  **Code Completion:** Many editors offer intelligent code completion based on the defined schemas. This means you 
@@ -25,32 +25,32 @@ We currently offer schemas for the following Apify Actor JSON files:
 
 -   **`actor.json`**: For defining the Actor's configuration.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/actor.json?v=0.4`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/actor.ide.json?v=0.5`
 
 -   **`dataset.json`**: For validating data in a dataset.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/dataset.json?v=0.4`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/dataset.ide.json?v=0.5`
 
 -   **`input.json`**: For the Actor's input.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/input.json?v=0.4`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/input.ide.json?v=0.5`
 
 -   **`key-value-store.json`**: For data within the key-value store.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/key-value-store.json?v=0.4`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/key-value-store.ide.json?v=0.5`
 
 -   **`output.json`**: For the Actor's output.
 
-    -   URL: `https://apify-projects.github.io/actor-json-schemas/output.json?v=0.4`
+    -   URL: `https://apify-projects.github.io/actor-json-schemas/output.ide.json?v=0.5`
 
 
-## How to Use a Scheme in Your Editor
+## How to use a schema in your editor
 
 Most modern code editors like VS Code, Atom, and IntelliJ IDEA support JSON schemas. The process is generally straightforward.
 
-Simply add the **`"$schema"`** key at the top of your JSON file and set its value to the URL of the scheme you want to use.
+Simply add the **`"$schema"`** key at the top of your JSON file and set its value to the URL of the schema you want to use.
 
-Here's an example of how you would link the validation json schema in your `INPUT_SCHEMA.json` file:
+Here's an example of how you would link the validation JSON Schema in your `INPUT_SCHEMA.json` file:
 
 ```json
 {
@@ -69,7 +69,7 @@ Here's an example of how you would link the validation json schema in your `INPU
 }
 ```
 
-Other editors may require you to install a separate plugin to use the JSON schemas for validation and 
+Other editors may require you to install a separate plugin to use the JSON Schemas for validation and 
 code-completion.
 
 ## Local development
@@ -82,7 +82,7 @@ This mirrors .github/workflows/publish-to-gh-pages.yml and produces the final fi
 - Quick start (one command)
   - From the repository root, run:
     - `bash ./run-all.sh`
-  - This will install dependencies (if needed), download schemas, describe them, and bundle the results into `./output/`.
+  - This will install dependencies (if needed), download schemas, add descriptions, apply modifications, and bundle the results into `./output/`.
 
 - Prerequisites
   - Node.js 20 or newer (required by both packages)
@@ -97,35 +97,40 @@ This mirrors .github/workflows/publish-to-gh-pages.yml and produces the final fi
     - `cd json-schema-bundler && npm ci && cd -`
 
 - Step 1: Download upstream JSON Schemas
-  - The list of source URLs is in json-schemas-urls.txt. To download them into ./downloaded-json-schemas:
-    - `bash ./scripts/download-json-schemas.sh`
+  - The list of source URLs is in `./scripts/json-schemas-urls.txt`. To download them into `./downloaded-json-schemas`:
+    - `bash ./scripts/00_download-json-schemas.sh`
 
 - Step 2: Apply description rules ("describe")
-  - This will read the downloaded schemas, apply the rules from ./json-schemas-description/*.rules.xml, and write to ./output/:
-    - `bash ./scripts/describe-json-schemas.sh`
+  - This reads the downloaded schemas, applies the rules from `./rules/add-description/*.description-rules.xml`, and writes to `./output/`:
+    - `bash ./scripts/01_describe-json-schemas.sh`
 
-- Step 3: Bundle the described schemas
-  - This step processes the files in ./output/ to produce self-contained/bundled schemas in-place:
-    - `bash ./scripts/bundle-json-schemas.sh`
+- Step 3: Apply modification rules ("modify")
+  - This reads the described schemas from `./output`, applies rules from `./rules/modifications/*.modification-rules.xml`, and writes IDE-focused variants `*.ide.json` to `./output/`:
+    - `bash ./scripts/02_modify-json-schemas.sh`
+
+- Step 4: Bundle the schemas
+  - This step processes the `*.ide.json` files in `./output/` to produce self-contained/bundled schemas in-place:
+    - `bash ./scripts/03_bundle-json-schemas.sh`
 
 - Cleaning up
   - Remove downloaded or generated files if needed:
     - `rm -rf ./downloaded-json-schemas ./output`
 
-- Now you can find final json-schemas in the ./output/ directory
+- Now you can find final JSON Schemas in the `./output/` directory
 
 - Troubleshooting
-  - No schemas found in ./downloaded-json-schemas when describing:
-    - Ensure you ran the download step successfully and that json-schemas-urls.txt contains valid URLs.
-  - "Rules not found" during describe step:
-    - Each input schema is matched by a corresponding rules file in ./json-schemas-description with the same base name and .rules.xml extension (e.g., actor.rules.xml).
+  - No schemas found in `./downloaded-json-schemas` when describing:
+    - Ensure you ran the download step successfully and that `./scripts/json-schemas-urls.txt` contains valid URLs.
+  - "Rules not found" during describe/modify steps:
+    - For descriptions, rules live in `./rules/add-description/<name>.description-rules.xml` (e.g., `actor.description-rules.xml`).
+    - For modifications, rules live in `./rules/modifications/<name>.modification-rules.xml`.
   - CLI not found or TypeScript errors:
-    - Make sure you ran npm ci inside both json-schema-modificator and json-schema-bundler. Node 20+ is required.
+    - Make sure you ran `npm ci` inside both `json-schema-modificator` and `json-schema-bundler`. Node 20+ is required.
   - Network issues when downloading:
-    - The download script uses wget with retries. If your network blocks requests, try again or download the files manually into ./downloaded-json-schemas.
+    - The download script uses `wget` with retries. If your network blocks requests, try again or download the files manually into `./downloaded-json-schemas`.
 
 ## Contributing
 
-We welcome contributions! If you have suggestions for improvements, find a bug, or want to contribute a new scheme, please open an issue or submit a pull request.
+We welcome contributions! If you have suggestions for improvements, find a bug, or want to contribute a new schema, please open an issue or submit a pull request.
 
 This README is designed to be clear, concise, and easy for developers to use. It explains the project's purpose, provides direct links to the schemas, and includes a simple example to help developers get started.

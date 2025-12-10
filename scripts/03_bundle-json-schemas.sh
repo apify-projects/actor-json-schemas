@@ -8,7 +8,7 @@ set -euo pipefail
 # - ./output/*.json                 # input + output schemas (already described)
 # - ./json-schema-bundler           # package with the CLI (uses tsx start:dev)
 
-ROOT_DIR="$(dirname "$0")/.."
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
 
 OUTPUT_DIR="$ROOT_DIR/output" # also used for input
 BUNDLER_DIR="$ROOT_DIR/json-schema-bundler"

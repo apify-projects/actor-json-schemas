@@ -4,6 +4,24 @@ import * as addDescriptionRule from './rules/add-description-rule.js';
 import * as replaceValueRule from './rules/replace-value-rule.js';
 import * as removeValueRule from './rules/remove-value-rule.js';
 
+/**
+ * Parses an XML rules file and returns a list of supported rules.
+ *
+ * Expected XML structure:
+ *
+ * <Enchantments>
+ *   <AddDescription json-path="/pointer" format="markdown">
+ *     Markdown content...
+ *   </AddDescription>
+ *   <ReplaceValue json-path="/pointer" type="json|js">...</ReplaceValue>
+ *   <RemoveValue json-path="/pointer" />
+ * </Enchantments>
+ *
+ * Notes:
+ * - Only direct children of <Enchantments> are processed.
+ * - Unknown tags are ignored with a console warning.
+ * - See individual rule parsers for attribute semantics and behavior.
+ */
 export function parseRuleFile(ruleFileContent: string): Rule[] {
     const supportedRules: Rule[] = [];
 

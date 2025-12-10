@@ -5,11 +5,11 @@ set -euo pipefail
 # using the json-schema-modificator CLI for each file.
 #
 # Expected layout (relative to repo root):
-# - ../downloaded-json-schemas/*.json         # input schemas (downloaded earlier)
-# - ../json-schemas-description/*.rules.xml   # rules per schema name
-# - ../output/                                # output directory
+# - ./downloaded-json-schemas/*.json         # input schemas (downloaded earlier)
+# - ./rules/add-description/*.description-rules.xml   # rules per schema name
+# - ./output/                                # output directory
 
-ROOT_DIR="$(dirname "$0")/.."
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
 INPUT_DIR="$ROOT_DIR/downloaded-json-schemas"
 RULES_DIR="$ROOT_DIR/rules/add-description"
 OUTPUT_DIR="$ROOT_DIR/output"
