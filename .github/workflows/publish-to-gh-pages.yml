@@ -41,22 +41,16 @@ jobs:
             json-schema-modificator/package-lock.json
             json-schema-bundler/package-lock.json
 
-      - name: Download JSON Schemas
-        run: bash ./scripts/download-json-schemas.sh
-
       - name: Install modificator deps
         working-directory: json-schema-modificator
         run: npm ci
-
-      - name: Describe schemas (apply rules)
-        run: bash ./scripts/describe-json-schemas.sh
 
       - name: Install bundler deps
         working-directory: json-schema-bundler
         run: npm ci
 
-      - name: Bundle schemas
-        run: bash ./scripts/bundle-json-schemas.sh
+      - name: Post-process JSON schemas
+        run: bash ./run-all.sh
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
