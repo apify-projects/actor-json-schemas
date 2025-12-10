@@ -10,7 +10,7 @@ set -euo pipefail
 #
 # Prereqs: Node.js 20+, npm, bash, wget
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(dirname "$0")"
 MODIFICATOR_DIR="$ROOT_DIR/json-schema-modificator"
 BUNDLER_DIR="$ROOT_DIR/json-schema-bundler"
 
@@ -40,6 +40,8 @@ bash "$ROOT_DIR/scripts/00_download-json-schemas.sh"
 # Describe JSON Schemas
 log "Describing JSON Schemas ..."
 bash "$ROOT_DIR/scripts/01_describe-json-schemas.sh"
+
+# At this point the raw schemas are described
 
 # Modify JSON Schemas
 log "Modifying JSON Schemas ..."

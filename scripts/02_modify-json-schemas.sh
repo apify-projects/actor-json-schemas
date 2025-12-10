@@ -7,30 +7,31 @@ set -euo pipefail
 # Expected layout (relative to repo root):
 # - ./downloaded-json-schemas/*.json        # input schemas (downloaded earlier)
 # - ./json-schemas-description/*.rules.xml  # rules per schema name
-# - ./output/                                # output directory
+# - ./output/                               # output directory
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
-DOWNLOAD_DIR="$ROOT_DIR/downloaded-json-schemas"
-RULES_DIR="$ROOT_DIR/json-schemas-description"
+ROOT_DIR="$(dirname "$0")/.."
+INPUT_DIR="$ROOT_DIR/output" # We are using the output from previous step (JSON description) as an input for this one
+RULES_DIR="$ROOT_DIR/rules/modifications"
 OUTPUT_DIR="$ROOT_DIR/output"
 MODIFICATOR_DIR="$ROOT_DIR/json-schema-modificator"
 
 mkdir -p "$OUTPUT_DIR"
 
 shopt -s nullglob
-schemas=("$DOWNLOAD_DIR"/*.json)
+schemas=("$INPUT_DIR"/*.json)
 shopt -u nullglob
 
 if [[ ${#schemas[@]} -eq 0 ]]; then
-  echo "No schemas found in $DOWNLOAD_DIR. Did the download step run?" >&2
+  echo "No schemas found in $INPUT_DIR. Did the download step run?" >&2
   exit 1
 fi
 
 for input_path in "${schemas[@]}"; do
-  base_name="$(basename "$input_path")"          # e.g. actor.json
+  echo "input_path $input_path ..."
+
+  base_name="$(basename "$input_path")"           # e.g. actor.json
   name_no_ext="${base_name%.json}"                # e.g. actor
-  rules_path="$RULES_DIR/$name_no_ext.rules.xml"  # e.g. json-schemas-description/actor.rules.xml
-  output_path="$OUTPUT_DIR/$base_name"            # e.g. output/actor.json
+  rules_path="$RULES_DIR/$name_no_ext.modification-rules.xml"  # e.g. rules/modifications/actor.modification-rules.xml
 
   if [[ ! -f "$rules_path" ]]; then
     echo "Rules not found for $base_name at $rules_path. Skipping." >&2
@@ -42,7 +43,7 @@ for input_path in "${schemas[@]}"; do
   # We run it from inside the package directory to reuse its tsx entry.
   (
     cd "$MODIFICATOR_DIR"
-    npm run start:dev -- -i "../${input_path#$ROOT_DIR/}" -d "../${rules_path#$ROOT_DIR/}" -o "../${output_path#$ROOT_DIR/}"
+    npm run start:dev -- -i "${OUTPUT_DIR}/${base_name}" -d "$rules_path" -o "${OUTPUT_DIR}/${name_no_ext}.ide.json"
   )
 
 done
