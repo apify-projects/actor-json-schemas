@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="https://apify.com/json-schema-tools/enchantments"
-           xmlns="https://apify.com/json-schema-tools/enchantments"
+           targetNamespace="https://apify.com/json/modifications"
+           xmlns="https://apify.com/json/modifications"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 

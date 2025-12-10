@@ -29,7 +29,7 @@
     },
     "scripts": {
         "start": "npm run start:dev",
-        "start:dev": "tsx src/cli.ts",
+        "start:dev": "tsx src/cli.ts -i ../downloaded-json-schemas/actor.json -o ../output/actor.json",
         "build": "tsc",
         "lint": "eslint ./src --ext .ts",
         "lint:fix": "eslint ./src --ext .ts --fix",
