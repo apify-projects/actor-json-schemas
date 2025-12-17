@@ -113,7 +113,6 @@ export async function scopeJsonSchema(
                     parent.value[REF_ATTRIBUTE] += `${prefix}`;
                 }
                 parent.value[REF_ATTRIBUTE] += `${anchorPath}`;
-                console.log("Scoping ", jsonPointer , `${prefix}#${anchorPath}`);
             } else if (refRelativeFilePath) {
                 // External reference (could be a local file path or an absolute URL)
                 const isUrl = /^https?:\/\//.test(refRelativeFilePath);

@@ -33,12 +33,11 @@ try {
     process.exit(1);
 }
 
-const DEFAULT_DESCRIPTION_FILEPATH = `${parsedInputPath.dir}/${parsedInputPath.name}`
-    + `.description.md`;
-const descriptionFilepath = path.resolve(process.cwd(), options.description ?? DEFAULT_DESCRIPTION_FILEPATH);
+const DEFAULT_MODIFICATION_RULES_FILEPATH = `${parsedInputPath.dir}/${parsedInputPath.name}.rules.xml`;
+const descriptionFilepath = path.resolve(process.cwd(), options.description ?? DEFAULT_MODIFICATION_RULES_FILEPATH);
 
 if (!await fs.stat(descriptionFilepath).catch(() => false)) {
-    console.error(`Cannot open input schema at "${descriptionFilepath}"!`);
+    console.error(`Cannot open modification rules at "${descriptionFilepath}"!`);
     process.exit(1);
 }
 
@@ -50,6 +49,7 @@ const output = JSON.stringify(enchantedJsonSchema, null, 2)
 if (options.output) {
     // Output to the file
     const absoluteOutputPath = path.resolve(process.cwd(), options.output);
+    await fs.mkdir(path.dirname(absoluteOutputPath), { recursive: true });
     await fs.writeFile(absoluteOutputPath, output, { encoding: 'utf8' });
 } else {
     // Output to console

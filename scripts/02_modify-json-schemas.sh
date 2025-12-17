@@ -31,6 +31,7 @@ for input_path in "${schemas[@]}"; do
 
   base_name="$(basename "$input_path")"           # e.g. actor.json
   name_no_ext="${base_name%.json}"                # e.g. actor
+
   rules_path="$RULES_DIR/$name_no_ext.modification-rules.xml"  # e.g. rules/modifications/actor.modification-rules.xml
 
   if [[ ! -f "$rules_path" ]]; then

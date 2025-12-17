@@ -6,16 +6,13 @@
     <RemoveValue json-path="**/$id"/>
     <!-- We need to use relative paths as later these will include json-schemas with descriptions -->
     <ReplaceValue json-path="**/$ref" type="js">
-        value.replace(/^https:\/\/apify.com\/schemas\/v1\//, '')
+        value.replace(/^https:\/\/apify\.com\/schemas\/v1\/(.+)\.json/, '$1.ide.json')
     </ReplaceValue>
     <ReplaceValue json-path="/properties/inputSchema/oneOf" type="json">
-        [{ "type": "string" }, { "$ref": "input.json" }]
+        [{ "type": "string" }, { "$ref": "input.ide.json" }]
     </ReplaceValue>
     <ReplaceValue json-path="/properties/input/oneOf" type="json">
-        [{ "type": "string" }, { "$ref": "input.json" }]
-    </ReplaceValue>
-    <ReplaceValue json-path="**/$ref" type="js">
-        value.replace(/^https:\/\/apify.com\/schemas\/v1\//, '')
+        [{ "type": "string" }, { "$ref": "input.ide.json" }]
     </ReplaceValue>
     <!-- Replace values due to better DX -->
     <ReplaceValue json-path="/properties/minMemoryMbytes" type="json">

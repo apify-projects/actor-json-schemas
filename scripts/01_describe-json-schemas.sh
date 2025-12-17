@@ -42,7 +42,7 @@ for input_path in "${schemas[@]}"; do
   # We run it from inside the package directory to reuse its tsx entry.
   (
     cd "$MODIFICATOR_DIR"
-    npm run start:dev -- -i "../${input_path#$ROOT_DIR/}" -d "../${rules_path#$ROOT_DIR/}" -o "../${output_path#$ROOT_DIR/}"
+    npm run start:dev -- -i "$input_path" -d "$rules_path" -o "$output_path"
   )
 
 done
