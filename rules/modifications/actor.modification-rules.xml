@@ -30,6 +30,16 @@
             "enum": [128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768]
         }
     </ReplaceValue>
+    <!-- In the original schema there is no support for meta attribute which is part of default Actor templates -->
+    <ReplaceValue json-path="/properties" type="js">
+        ({
+            ...value,
+            "meta": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        })
+    </ReplaceValue>
     <!-- In the original schema these attributes have additionalProperties true, which is not great for code auto-complete -->
     <ReplaceValue json-path="/" type="js">
         ({ ...value, additionalProperties: false })
