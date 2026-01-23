@@ -13,6 +13,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 MODIFICATOR_DIR="$ROOT_DIR/json-schema-modificator"
 BUNDLER_DIR="$ROOT_DIR/json-schema-bundler"
+CHECKER_DIR="$ROOT_DIR/json-schema-description-checker"
 
 log() {
   echo "[run-all] $*"
@@ -33,6 +34,13 @@ else
   log "json-schema-bundler dependencies already installed."
 fi
 
+if [[ ! -d "$CHECKER_DIR/node_modules" ]]; then
+  log "Installing dependencies in json-schema-description-checker ..."
+  (cd "$CHECKER_DIR" && npm ci)
+else
+  log "json-schema-description-checker dependencies already installed."
+fi
+
 # Download upstream JSON Schemas
 log "Downloading upstream JSON Schemas ..."
 bash "$ROOT_DIR/scripts/00_download-json-schemas.sh"
@@ -50,5 +58,9 @@ bash "$ROOT_DIR/scripts/02_modify-json-schemas.sh"
 # Bundle JSON Schemas
 log "Bundling JSON Schemas ..."
 bash "$ROOT_DIR/scripts/03_bundle-json-schemas.sh"
+
+# Check for missing descriptions
+log "Checking for missing descriptions in JSON Schemas ..."
+bash "$ROOT_DIR/scripts/04_check-descriptions.sh"
 
 log "All done. Find final JSON Schemas in: $ROOT_DIR/output"
